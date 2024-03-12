@@ -1,0 +1,9 @@
+# user-defined folders
+.venv
+.readmes
+.idea
+.vscode
+
+# user-defined files
+Procfile
+test_content.sh
