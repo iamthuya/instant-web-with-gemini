@@ -1,4 +1,5 @@
 # user-defined folders
+venv
 .venv
 .readmes
 .idea
