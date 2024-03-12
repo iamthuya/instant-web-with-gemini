@@ -11,6 +11,7 @@ from vertexai.preview.generative_models import GenerativeModel, Image
 import vertexai.preview.generative_models as generative_models
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
 vertexai.init(project="thuya-next-demos", location="us-central1")
 model = GenerativeModel("gemini-1.0-ultra-vision-001")
@@ -53,8 +54,9 @@ def generate(wireframe_image):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        f = request.files['file-upload']
-        image_bytes = f.read().decode('utf-8')
+        print("here")
+        uploaded_file = request.files['file-upload']
+        image_bytes = uploaded_file.read()
         wireframe_image = Image.from_bytes(image_bytes)
         response = generate(wireframe_image)
         return render_template('index.html', response=response)
