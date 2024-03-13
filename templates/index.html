@@ -1,129 +1,25 @@
-<!doctype html>
-<html lang=en>
-<head>
-<meta charset=utf-8>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sketch to Web</title>
-<link rel="icon" type="image/svg+xml" href="https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/favicon.ico" />
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="preload" as="font"> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-</head>
-
-<body>
-	<div class="bg-white">
-		<header class="absolute inset-x-0 top-0 z-50">
-		  <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-			<div class="flex lg:flex-1">
-			  <a href="#" class="-m-1.5 p-1.5">
-				<span class="sr-only">Your Company</span>
-				<img class="h-8 w-auto" src="https://www.gstatic.com/devrel-devsite/prod/v0e0f589edd85502a40d78d7d0825db8ea5ef3b99ab4070381ee86977c9168730/cloud/images/cloud-logo.svg" alt="Google Cloud" />
-			  </a>
+{% extends "base.html" %}
+{% block content %}
+<div class="relative isolate px-6 pt-6 lg:px-8">
+	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+		<div class="hidden sm:mb-8 sm:flex sm:justify-center">
+			<div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+				Announcing our next-generation model: <span class="font-bold">Gemini 1.5</span> <a href="https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/" target="_blank" class="font-semibold text-indigo-600"><span class="absolute inset-0" aria-hidden="true"></span>Read more <span aria-hidden="true">&rarr;</span></a>
 			</div>
-			<div class="flex lg:hidden">
-			  <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-				<span class="sr-only">Open main menu</span>
-				<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-				  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-				</svg>
-			  </button>
-			</div>
-			<div class="hidden lg:flex lg:gap-x-12">
-			  <!-- <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Product</a>
-			  <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a>
-			  <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
-			  <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a> -->
-			</div>
-			<div class="hidden lg:flex lg:flex-1 lg:justify-end">
-			  <a href="#" class="text-sm font-semibold leading-6 text-gray-900"><i class="fa-brands fa-github"></i> GitHub </a> 
-			  <!-- <span aria-hidden="true">&rarr;</span> -->
-			</div>
-		  </nav>
-		  <!-- Mobile menu, show/hide based on menu open state. -->
-			<!-- Background backdrop, show/hide based on slide-over state. -->
-
-		  <!-- <div class="lg:hidden" role="dialog" aria-modal="true">
-			<div class="fixed inset-0 z-50"></div>
-			<div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-			  <div class="flex items-center justify-between">
-				<a href="#" class="-m-1.5 p-1.5">
-				  <span class="sr-only">Your Company</span>
-				  <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
-				</a>
-				<button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
-				  <span class="sr-only">Close menu</span>
-				  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-				  </svg>
-				</button>
-			  </div>
-			  <div class="mt-6 flow-root">
-				<div class="-my-6 divide-y divide-gray-500/10">
-				  <div class="space-y-2 py-6">
-					<a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Product</a>
-					<a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</a>
-					<a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</a>
-					<a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Company</a>
-				  </div>
-				  <div class="py-6">
-					<a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </div> -->
-		</header>
-	  
-		<div class="relative isolate px-6 pt-6 lg:px-8">
-		  <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-				<div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
-		  </div>
-		  <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-			<div class="hidden sm:mb-8 sm:flex sm:justify-center">
-			  <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-				Announcing our next-generation model: <span class="font-bold">Gemini 1.5</span>. <a href="https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/" target="_blank" class="font-semibold text-indigo-600"><span class="absolute inset-0" aria-hidden="true"></span>Read more <span aria-hidden="true">&rarr;</span></a>
-			  </div>
-			</div>
-			<div class="text-center">
-			<form action="/" method="post" enctype=multipart/form-data>
-			  <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Sketch to Web</h1>
-			  <p class="mt-6 text-lg leading-8 text-gray-600">Turn static wireframes into web pages in an instant with 
-				<a href="https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemini-pro-vision" target="_blank"><span class="font-bold">Gemini Pro Vision</span></a>'s 
-				revolutionary multimodality features. Our innovative AI technology empowers you to bridge the gap between design and development seamlessly, streamlining your workflow and accelerating your project timelines.</p>
-				<div class="col-span-full mt-10">
-					<!-- <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label> -->
-					<div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-					  <div class="text-center">
-						<svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-						  <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-						</svg>
-						<div class="mt-4 flex text-sm leading-6 text-gray-600">
-								
-						  <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-							<span>Upload a wireframe</span>
-							<input type="file" accept="image/png" id="file-upload" name="file-upload" class="sr-only">
-						  </label>
-						  <p class="pl-1">or drag and drop here to get started</p>
-						</div>
-						<p class="text-xs leading-5 text-gray-600">(PNG or JPG up to 10MB)</p>
-					  </div>
-					</div>
-				  </div>
-				<div class="mt-10 flex items-center justify-center gap-x-6">
-					<input type="submit" value="Get Started" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-					<!-- <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a> -->
-				<!-- <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a> -->
-			  </div>
-			</div>
-			</form>
-				<div class="mt-10">
-					{{ response }}
-				</div>
-		  </div>
-		  <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
-			<div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
-		  </div>
 		</div>
-	  </div>	  
-</body>
-</html>
+		<div class="text-center">
+			<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Sketch to Web</h1>
+			<p class="mt-6 text-lg leading-8 text-gray-600">Turn static wireframes into web pages in an instant with 
+			<a href="https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemini-pro-vision" target="_blank"><span class="font-bold">Gemini Pro Vision</span></a>'s 
+			revolutionary multimodality features. Our innovative AI technology empowers you to bridge the gap between design and development seamlessly, streamlining your workflow and accelerating your project timelines.</p>
+			<div class="col-span-full mt-10">
+					<!-- <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label> -->
+				<div class="mt-10 flex items-center justify-center gap-x-6">
+					<a href="/generate" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
+					<!-- <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

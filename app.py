@@ -3,7 +3,9 @@ import os
 from flask import (
     Flask, 
     render_template, 
-    request
+    request,
+    url_for,
+    redirect
 )
 
 import vertexai
@@ -27,7 +29,7 @@ def generate(wireframe_image):
         instructions,
         "input wireframe:",
         wireframe_image,
-        "\n your html page:\n<!DOCTYPE html>"
+        "\nyour html page:\n<div>"
     ]
     
     responses = model.generate_content(
@@ -50,18 +52,28 @@ def generate(wireframe_image):
     response = ""
     for res in responses:
         response += res.text.strip()
-
     return response
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/', methods=['GET'])
 def index():
+    return render_template('index.html')
+
+
+@app.route('/generate', methods=['GET', 'POST'])
+def generate():
     if request.method == 'POST':
         uploaded_file = request.files['file-upload']
         wireframe_image = Image.from_bytes(uploaded_file.read())
         response = generate(wireframe_image)
         return response
     else:
-        return render_template('index.html')
+        return render_template('generate.html')
+
+
+# @app.route('/response')
+# def response(response):
+#     return render_template('response.html', response=response)
 
 
 if __name__ == '__main__':
