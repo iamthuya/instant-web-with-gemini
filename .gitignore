@@ -1,5 +1,7 @@
 # user-defined folders
 venv
+node_modules
+
 .venv
 .readmes
 .idea
@@ -7,4 +9,4 @@ venv
 
 # user-defined files
 Procfile
-test_content.sh
+*.sh

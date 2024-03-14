@@ -4,29 +4,27 @@
 <div class="relative isolate px-6 pt-6 lg:px-8">
 	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
 		<div class="text-center">
-			<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Experience the new way</h1>
+			<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Multimodal Experience</h1>
 		</div>
 		<form action="/response" target="_blank" method="post" enctype=multipart/form-data>
 			<div class="mt-6 flex items-center justify-center w-full" id="drop-area">
-				<label for="image-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+				<label for="image-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-100 hover:border-gray-100 dark:hover:border-gray-100">
 					<div class="flex flex-col items-center justify-center pt-5 pb-6">
-						<svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+						<svg class="w-8 h-8 mb-4 text-indigo-600 dark:text-indigo-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
 								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
 						</svg>
-						<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload a wireframe</span></p>
-						<!-- <p> or drag and drop to get started</p> -->
-						<p class="text-xs text-gray-500 dark:text-gray-400">(PNG or JPG only)</p>
+						<p class="mb-2 text-sm text-indigo-600 dark:text-indigo-600"><span class="font-semibold">Click to upload a wireframe</span></p>
+						<p class="text-xs text-indigo-600 dark:text-indigo-600">(PNG or JPG only)</p>
 					</div>
 					<input id="image-upload" name="image-upload" type="file" accept="image/png, image/jpeg" class="hidden" />
 				</label>
 			</div>
-			<div class="mt-6 flex items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg hidden" id="preview-area"></div>
-			<div class="mt-6 flex items-center justify-center gap-x-6">
-				<input type="button" value="Reset" onClick="resetForm()" id="reset-button" class="hidden rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-				<input type="submit" value="Generate" id="generate-button" class="hidden rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+			<div class="mt-6 items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg hidden" id="preview-area"></div>
+			<div class="mt-6 items-center justify-center gap-x-6 hidden" id="button-container">
+				<input type="button" value="Reset" onClick="resetForm()" id="reset-button" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+				<input type="submit" value="Generate" id="generate-button" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 			</div>
 		</form>
-		<div class="mt-6 flex items-center justify-center" id="response-area"></div>
 	</div>
 </div>
 {% endblock %}
@@ -36,11 +34,7 @@
 const dropArea = document.getElementById("drop-area")
 const imageInput = document.getElementById("image-upload")
 const previewArea = document.getElementById("preview-area")
-const resetButton = document.getElementById("reset-button")
-const generateButton = document.getElementById("generate-button")
-const responseArea = document.getElementById("response-area")
-
-let file
+const buttonContainer = document.getElementById("button-container")
 
 // Prevent default drag behaviors
 ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -53,19 +47,11 @@ function preventDefaults (e) {
 	e.stopPropagation()
 }
 
-// Handle dropped files
-// dropArea.addEventListener('drop', handleDrop, false)
-
-// function handleDrop(event) {
-// 	file = event.dataTransfer.files[0];
-// 	showPreview(file)
-// }
-
 // Handle upload files
 imageInput.addEventListener('change', handleUpload, false)
 
 function handleUpload(event) {
-	file = event.target.files[0];
+	let file = event.target.files[0];
 	showPreview(file)
 }
 
@@ -73,8 +59,7 @@ function handleUpload(event) {
 function showPreview(file) {
 	dropArea.style.display = 'none'
 	previewArea.style.display = 'flex'
-	resetButton.style.display = 'flex'
-	generateButton.style.display = 'flex'
+	buttonContainer.style.display = 'flex'
 
 	let reader = new FileReader()
 	reader.readAsDataURL(file)
@@ -90,32 +75,7 @@ function resetForm() {
 	previewArea.innerHTML = ''
 	dropArea.style.display = 'flex'
 	previewArea.style.display = 'none'
-	resetButton.style.display = 'none'
-	generateButton.style.display = 'none'
-}
-
-// Generate response by calling api
-function generate() {
-	if (file) {
-		let formData = new FormData();
-        formData.append('image', file);
-
-		fetch('/generate', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-		.then(text => {
-			console.log(text)
-			responseArea.innerHTML = text
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-
-	} else {
-        alert('Please select an image first.');
-    }
+	buttonContainer.style.display = 'none'
 }
 </script>
 {% endblock %}

@@ -1,5 +1,4 @@
 import os
-
 from flask import (
     Flask, 
     render_template, 
@@ -8,11 +7,11 @@ from flask import (
 )
 
 import vertexai
-from vertexai.preview.generative_models import GenerativeModel, Image
 import vertexai.preview.generative_models as generative_models
+from vertexai.preview.generative_models import GenerativeModel, Image
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
 vertexai.init(project="thuya-next-demos", location="us-central1")
 # model = GenerativeModel("gemini-1.0-ultra-vision-001")
@@ -21,22 +20,23 @@ model = GenerativeModel("gemini-1.0-pro-vision-001")
 
 def prompt(wireframe_image):
     instructions = (
-        f"You are an expert web developer. Your are good at creating webpages from hand-drawn wireframes." 
-        f"You use 'placehold.co' to create dummy images with appropriate size."
+        f"You are an expert web developer tasked with converting a hand-drawn wireframe into an HTML page."
+        f"You may use CSS in <head> tag for styling and layout. Employ placehold.co images as placeholders."
+        f"Provide response in pure HTML page without denoting with ```html code block"
     )
     contents = [
         instructions,
-        "input wireframe:",
+        "hand-drawn wireframe:",
         wireframe_image,
-        "\nyour html page:\n<div>"
+        "HTML page:"
     ]
     
     responses = model.generate_content(
         contents=contents,
         generation_config={
             "max_output_tokens": 2048,
-            "temperature": 0.4,
-            "top_p": 1,
+            "temperature": 1.0,
+            "top_p": 0.8,
             "top_k": 32
         },
         safety_settings={
@@ -50,7 +50,10 @@ def prompt(wireframe_image):
 
     response = ""
     for res in responses:
-        response += res.text.strip()
+        try:
+            response += res.text.strip()
+        except ValueError as e:
+            return "<h1> Unable to get a response from the model. Please try again later.</h1>"
     return response
 
 
@@ -70,7 +73,8 @@ def response():
         uploaded_file = request.files['image-upload']
         wireframe_image = Image.from_bytes(uploaded_file.read())
         response = prompt(wireframe_image)
-        return response
+        if response:
+            return response
     else:
         return redirect('/generate')
 

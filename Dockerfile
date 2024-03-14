@@ -2,8 +2,8 @@
 FROM python:3.12-slim
 
 # Initialize arguments
-ARG USER_NAME=appuser
-ARG APP_ROOT=/home/$USER_NAME/code
+ARG USER_NAME=docker
+ARG APP_ROOT=/home/$USER_NAME/app
 
 # Add python local bin to PATH
 ENV PATH=$APP_ROOT/.local/bin:$PATH
@@ -16,6 +16,8 @@ RUN apt-get -qq update --fix-missing \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log /tmp/* \
     && useradd --create-home $USER_NAME
 
+RUN pip -q install --no-cache-dir gunicorn 
+
 # Change user and working directory
 USER $USER_NAME
 RUN mkdir $APP_ROOT
@@ -27,10 +29,11 @@ RUN pip -q install --no-cache-dir -r requirements.txt \
  && rm requirements.txt
 
 # Copy rest of the code
-COPY app.py ./
+COPY app.py ./app.py
 COPY templates ./templates
+COPY static/tailwind-output.css ./static/tailwind-output.css
 
 EXPOSE 8080
 
-# Run app.py when the container launches
-ENTRYPOINT ["python", "app.py"]
+# Run serve with gunicorn when the container launches
+CMD ["gunicorn", "-w", "4", "--bind", "0.0.0.0:8080", "app:app"] 
