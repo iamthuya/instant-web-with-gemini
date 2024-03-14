@@ -20,7 +20,7 @@ vertexai.init(project="thuya-next-demos", location="us-central1")
 model = GenerativeModel("gemini-1.0-pro-vision-001")
 
 
-def generate(wireframe_image):
+def prompt(wireframe_image):
     instructions = (
         f"You are an expert web developer. Your are good at creating webpages from hand-drawn wireframes." 
         f"You use 'placehold.co' to create dummy images with appropriate size."
@@ -60,21 +60,22 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/generate', methods=['GET', 'POST'])
+@app.route('/generate', methods=['GET'])
 def generate():
-    if request.method == 'POST':
-        uploaded_file = request.files['file-upload']
-        wireframe_image = Image.from_bytes(uploaded_file.read())
-        response = generate(wireframe_image)
-        return render_template('generate.html', response=response)
-    else:
-        return render_template('generate.html')
+    return render_template('generate.html')
 
-# @app.route('/response')
-# def response(response):
-#     return render_template('response.html', response=response)
+
+@app.route('/response', methods=['GET', 'POST'])
+def response():
+    if request.method == 'POST':
+        uploaded_file = request.files['image-upload']
+        wireframe_image = Image.from_bytes(uploaded_file.read())
+        response = prompt(wireframe_image)
+        return response
+    else:
+        return redirect('/generate')
 
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=True, port=server_port, host='0.0.0.0')
+    app.run(debug=False, port=server_port, host='0.0.0.0')
