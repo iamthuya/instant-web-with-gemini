@@ -61,16 +61,14 @@ def index():
 
 
 @app.route('/generate', methods=['GET', 'POST'])
-# @app.route('/', methods=['GET', 'POST'])
 def generate():
     if request.method == 'POST':
         uploaded_file = request.files['file-upload']
         wireframe_image = Image.from_bytes(uploaded_file.read())
         response = generate(wireframe_image)
-        return response
+        return render_template('generate.html', response=response)
     else:
         return render_template('generate.html')
-
 
 # @app.route('/response')
 # def response(response):
@@ -79,4 +77,4 @@ def generate():
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=False, port=server_port, host='0.0.0.0')
+    app.run(debug=True, port=server_port, host='0.0.0.0')

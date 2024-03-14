@@ -1,21 +1,4 @@
 {% extends "base.html" %}
-{% block head %}
-	{{ super() }}
-<style>
-/* #drop-area {
-    border: 2px dashed #ff0000;
-    border-radius: 20px;
-    width: 480px;
-    font-family: sans-serif;
-    margin: 100px auto;
-    padding: 20px;
-  } */
-
-/* #drop-area.highlight {
-    border-color: purple;
-} */
-</style>
-{% endblock %}
 
 {% block content %}
 <div class="relative isolate px-6 pt-6 lg:px-8">
@@ -35,10 +18,13 @@
 					<input id="image-upload" type="file" accept="image/png" class="hidden" />
 			</label>
 		</div>
-		<div class="flex items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg hidden" id="preview-area"></div>
-		<div class="mt-10 flex items-center justify-center gap-x-6">
+		<div class="mt-6 flex items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg hidden" id="preview-area"></div>
+		<div class="mt-6 flex items-center justify-center gap-x-6">
 			<input type="button" value="Reset" onClick="reset()" id="reset-button" class="hidden rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 			<input type="submit" value="Generate" id="generate-button" class="hidden rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+		</div>
+		<div class="mt6 flex items-center justify-center">
+			{{ response }}
 		</div>
 	</div>
 </div>
