@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang=en>
 <head>
+	{% block head %}
 	<meta charset=utf-8>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sketch to Web</title>
 	<link rel="icon" type="image/svg+xml" href="https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/favicon.ico" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-	<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+	<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+	{% endblock %}
 </head>
-
 <body>
 	<div class="bg-white">
 		<header class="absolute inset-x-0 top-0 z-50">
@@ -26,9 +27,10 @@
 			</div>
 		  </nav>
 		</header>
-	  
 		{% block content %}
 		{% endblock %}
-	</div>	  
+	</div>
+	{% block script %}
+	{% endblock %}
 </body>
 </html>

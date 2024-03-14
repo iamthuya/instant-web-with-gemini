@@ -55,12 +55,13 @@ def generate(wireframe_image):
     return response
 
 
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('index.html')
+# @app.route('/', methods=['GET'])
+# def index():
+#     return render_template('index.html')
 
 
 @app.route('/generate', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def generate():
     if request.method == 'POST':
         uploaded_file = request.files['file-upload']

@@ -1,39 +1,189 @@
 {% extends "base.html" %}
+{% block head %}
+	{{ super() }}
+<style>
+/* #drop-area {
+    border: 2px dashed #ff0000;
+    border-radius: 20px;
+    width: 480px;
+    font-family: sans-serif;
+    margin: 100px auto;
+    padding: 20px;
+  } */
+
+/* #drop-area.highlight {
+    border-color: purple;
+} */
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="relative isolate px-6 pt-6 lg:px-8">
 	<div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-		<div class="text-center">
-			<form action="/" method="post" enctype=multipart/form-data>
+		<div class="flex items-center justify-center w-full">
+			<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+					<div class="flex flex-col items-center justify-center pt-5 pb-6">
+							<svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+							</svg>
+							<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+							<p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+					</div>
+					<input id="dropzone-file" type="file" class="hidden" />
+			</label>
+		</div>
+		<div id="preview-area"></div>
+
+		<!-- <div class="text-center">
+			<form action="/response" method="post" enctype=multipart/form-data id="main-form">
 			<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Experience the new way</h1>
 				<div class="col-span-full mt-10">
-					<!-- <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label> -->
 					<div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-					<div class="text-center">
-						<svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-						<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-						</svg>
-						<div class="mt-4 flex text-sm leading-6 text-gray-600">
-								
-						<label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-							<span>Upload a wireframe</span>
-							<input type="file" accept="image/png" id="file-upload" name="file-upload" class="sr-only" required>
-						</label>
-						<p class="pl-1">or drag and drop here to get started</p>
+						<div class="border-dashed border-red-900/25 h-full w-full" id="drop-area">
+							<svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+							</svg>
+							<div class="mt-4 mx-auto text-sm leading-6 text-gray-600">
+								<label for="image-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+									<span>Upload a wireframe</span>
+									<input type="file" accept="image/png" id="image-upload" name="image-upload" class="sr-only" required>
+								</label>
+								<p class="pl-1">or drag and drop here</p>
+							</div>
+							<p class="text-xs leading-5 text-gray-600">(PNG or JPG up to 10MB)</p>
 						</div>
-						<p class="text-xs leading-5 text-gray-600">(PNG or JPG up to 10MB)</p>
-					</div>
+						<div id="preview-area"></div>
 					</div>
 				</div>
 				<div class="mt-10 flex items-center justify-center gap-x-6">
-					<input type="submit" value="Get Started" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-					<!-- <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a> -->
-				<!-- <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a> -->
-			</div>
-			</div>
+					<input type="button" value="Reset" onClick="resetForm()" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+					<input type="submit" value="Generate" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+					<a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
+					<a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+				</div>
 			</form>
-			<div class="mt-10">
-				{{ response }}
-			</div>
+		</div> -->
 	</div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+// ************************ Drag and drop ***************** //
+const dropArea = document.getElementById("drop-area")
+const previewArea = document.getElementById("preview-area")
+
+// Prevent default drag behaviors
+// ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+//   dropArea.addEventListener(eventName, preventDefaults, false)   
+//   document.body.addEventListener(eventName, preventDefaults, false)
+// })
+
+// // Highlight drop area when item is dragged over it
+// ;['dragenter', 'dragover'].forEach(eventName => {
+//   dropArea.addEventListener(eventName, highlight, false)
+// })
+
+// ;['dragleave', 'drop'].forEach(eventName => {
+//   dropArea.addEventListener(eventName, unhighlight, false)
+// })
+
+// Handle dropped files
+dropArea.addEventListener('drop', handleDrop, false)
+
+function preventDefaults (e) {
+  e.preventDefault()
+  e.stopPropagation()
+}
+
+function handleDrop(e) {
+	dropArea.style.display = 'none'
+  var dt = e.dataTransfer
+  var files = dt.files
+  handleFiles(files)
+}
+
+// let uploadProgress = []
+// let progressBar = document.getElementById('progress-bar')
+
+// function initializeProgress(numFiles) {
+//   progressBar.value = 0
+//   uploadProgress = []
+
+//   for(let i = numFiles; i > 0; i--) {
+//     uploadProgress.push(0)
+//   }
+// }
+
+// function updateProgress(fileNumber, percent) {
+//   uploadProgress[fileNumber] = percent
+//   let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
+//   progressBar.value = total
+// }
+
+function handleFiles(files) {
+  files = [...files]
+  // initializeProgress(files.length)
+  files.forEach(uploadFile)
+  files.forEach(previewFile)
+}
+
+function previewFile(file) {
+  let reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onloadend = function() {
+    let img = document.createElement('img')
+    img.src = reader.result
+    previewArea.appendChild(img)
+  }
+}
+
+// function uploadFile(file, i) {
+//   var url = 'https://api.cloudinary.com/v1_1/joezimim007/image/upload'
+//   var xhr = new XMLHttpRequest()
+//   var formData = new FormData()
+//   xhr.open('POST', url, true)
+//   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+
+//   // Update progress (can be used to show progress indicator)
+//   xhr.upload.addEventListener("progress", function(e) {
+//     updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+//   })
+
+//   xhr.addEventListener('readystatechange', function(e) {
+//     if (xhr.readyState == 4 && xhr.status == 200) {
+//       updateProgress(i, 100) // <- Add this
+//     }
+//     else if (xhr.readyState == 4 && xhr.status != 200) {
+//       // Error. Inform the user
+//     }
+//   })
+
+//   formData.append('upload_preset', 'ujpu6gyk')
+//   formData.append('file', file)
+//   xhr.send(formData)
+// }
+
+// ************************ form related ***************** //
+// const mainForm = document.getElementById("main-form")
+// const imageInput = document.getElementById("image-upload")
+
+// imageInput.addEventListener('change', (event) => {
+//   const file = event.target.files[0]; // Get the selected file
+//   if (file) {
+//     const reader = new FileReader();
+// 		reader.onloadend = function() {
+// 			let img = document.createElement('img')
+// 			img.src = reader.result
+// 			previewArea.appendChild(img)
+// 		}
+//   }
+// });
+
+// function resetForm() {
+// 	previewArea.innerHTML = ""
+// 	dropArea.style.display = 'block'
+// 	mainForm.reset()
+// }
+</script>
 {% endblock %}
