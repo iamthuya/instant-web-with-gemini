@@ -9,19 +9,20 @@
 		<form action="/response" target="_blank" method="post" enctype=multipart/form-data>
 			<div class="mt-6 flex items-center justify-center w-full" id="drop-area">
 				<label for="image-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-						<div class="flex flex-col items-center justify-center pt-5 pb-6">
-								<svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-								</svg>
-								<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Upload a wireframe</span> or drag and drop to get started</p>
-								<p class="text-xs text-gray-500 dark:text-gray-400">PNG or JPG (U)</p>
-						</div>
-						<input id="image-upload" name="image-upload" type="file" accept="image/png" class="hidden" />
+					<div class="flex flex-col items-center justify-center pt-5 pb-6">
+						<svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+						</svg>
+						<p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload a wireframe</span></p>
+						<!-- <p> or drag and drop to get started</p> -->
+						<p class="text-xs text-gray-500 dark:text-gray-400">(PNG or JPG only)</p>
+					</div>
+					<input id="image-upload" name="image-upload" type="file" accept="image/png, image/jpeg" class="hidden" />
 				</label>
 			</div>
 			<div class="mt-6 flex items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg hidden" id="preview-area"></div>
 			<div class="mt-6 flex items-center justify-center gap-x-6">
-				<input type="button" value="Reset" onClick="reset()" id="reset-button" class="hidden rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+				<input type="button" value="Reset" onClick="resetForm()" id="reset-button" class="hidden rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 				<input type="submit" value="Generate" id="generate-button" class="hidden rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 			</div>
 		</form>
@@ -53,12 +54,12 @@ function preventDefaults (e) {
 }
 
 // Handle dropped files
-dropArea.addEventListener('drop', handleDrop, false)
+// dropArea.addEventListener('drop', handleDrop, false)
 
-function handleDrop(event) {
-	file = event.dataTransfer.files[0];
-	showPreview(file)
-}
+// function handleDrop(event) {
+// 	file = event.dataTransfer.files[0];
+// 	showPreview(file)
+// }
 
 // Handle upload files
 imageInput.addEventListener('change', handleUpload, false)
@@ -85,9 +86,7 @@ function showPreview(file) {
 }
 
 // Reset the form
-function reset() {
-	console.log('clicked')
-	imageInput.value = ''
+function resetForm() {
 	previewArea.innerHTML = ''
 	dropArea.style.display = 'flex'
 	previewArea.style.display = 'none'
