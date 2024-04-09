@@ -1,0 +1,36 @@
+:root {
+    --duration: 3s;
+    --easing: linear;
+    --delay: 0s;
+}
+
+@keyframes shine { 
+    20%, 100% { transform: translateX(150%); }
+}
+
+.single-element {
+    position: relative;
+    width: 200px;
+    padding: 30px;
+    color: white;
+    letter-spacing: 0.5px;
+    border: 0;
+    border-radius: 10px;
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 300px;
+        height: 100%;
+        color: rgba(255, 255, 255, 0);
+        background-color: rgba(255, 255, 255,0);
+        background-image: linear-gradient(to right,
+            rgba(255, 255, 255, 0) 25%,
+            rgba(255, 255, 255, .5) 50%,
+            rgba(255, 255, 255, 0) 75%);
+        transform: skewX(-20deg) translateX(-100%);
+        animation: var(--duration) var(--easing) var(--delay) infinite forwards shine;
+    }
+}   

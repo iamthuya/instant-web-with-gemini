@@ -20,36 +20,27 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
 vertexai.init(project="thuya-next-demos", location="us-central1")
-# model = GenerativeModel("gemini-1.0-ultra-vision-001")
-model = GenerativeModel("gemini-1.0-pro-vision-001")
 
 
-def prompt(wireframe_image):
-    instructions = (
-        f"You are an expert web developer tasked with converting a hand-drawn wireframe into an HTML page."
-        f"You may use CSS in <head> tag for styling and layout. Employ placehold.co images as placeholders."
-        f"Provide response in pure HTML page without denoting with ```html code block"
-    )
+def prompt(wireframe_image, model, prompt, ):
+    model = GenerativeModel(model)
     contents = [
-        instructions,
-        "hand-drawn wireframe:",
         wireframe_image,
-        "HTML page:"
+        prompt
     ]
     
     responses = model.generate_content(
         contents=contents,
-        generation_config={
+        generation_config = {
             "max_output_tokens": 2048,
-            "temperature": 1.0,
+            "temperature": 0.6,
             "top_p": 0.8,
-            "top_k": 32
         },
-        safety_settings={
-                generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-                generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-                generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-                generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        safety_settings = {
+            generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+            generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+            generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+            generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
         },
         stream=True,
     )
@@ -59,19 +50,25 @@ def prompt(wireframe_image):
         try:
             response += res.text.strip()
         except ValueError as e:
-            return "<h1> Unable to get a response from the model. Please try again later.</h1>"
+            error_mesages = [
+                "Hold up! Gemini's brain is processing too many thoughts at once.",
+                "Gemini overloaded. Switching to idle mode for a recharge.",
+                "Oops! This Gemini's instance glitched. Please try again later.",
+                "Warning: Gemini reached maximum curiosity levels. Pausing for a knowledge download",
+                "Gemini is out! Currently exploring alternate realities. Will return shortly.",
+                "Gemini is tried. It needs a rest. Try again later",
+                "Error 404: Gemini's focus not found. May be distracted by a shiny object.",
+                "Gemini is temporarily unavailable. Please check back after it decides on a course of action.",
+                "Gemini needs a rest. Please come back in a minute."
+            ]
+            random_message = random.choice(error_mesages)
+            return f"<h1> {random_message} </h1>"
     return response
 
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
-
-
-def write_response(response, folder_name, file_name):
-    file_path = os.path.join(folder_name, file_name)
-    with open(file_path, "w") as file:
-        file.write(response)
 
 
 def create_public_html_file(html_content):
@@ -100,6 +97,8 @@ def response():
     if request.method == 'POST':
         uploaded_file = request.files['image-upload']
         wireframe_image = Image.from_bytes(uploaded_file.read())
+        model = request.form['model']
+        prompt = request.form['prompt'] 
         response = prompt(wireframe_image)
 
         if response:
@@ -116,4 +115,4 @@ def response():
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=False, port=server_port, host='0.0.0.0')
+    app.run(debug=True, port=server_port, host='0.0.0.0')
