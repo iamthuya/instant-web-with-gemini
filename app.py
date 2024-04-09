@@ -22,10 +22,10 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 vertexai.init(project="thuya-next-demos", location="us-central1")
 
 
-def prompt(wireframe_image, model, prompt, ):
+def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
     contents = [
-        wireframe_image,
+        wireframe,
         prompt
     ]
     
@@ -95,11 +95,11 @@ def create_public_html_file(html_content):
 @app.route('/response', methods=['GET', 'POST'])
 def response():
     if request.method == 'POST':
-        uploaded_file = request.files['image-upload']
-        wireframe_image = Image.from_bytes(uploaded_file.read())
+        uploaded_image = request.files['image-upload']
+        wireframe = Image.from_bytes(uploaded_image.read())
         model = request.form['model']
         prompt = request.form['prompt'] 
-        response = prompt(wireframe_image)
+        response = generate(wireframe, model, prompt)
 
         if response:
             public_url = create_public_html_file(response)
