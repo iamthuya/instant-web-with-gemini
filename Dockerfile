@@ -32,6 +32,7 @@ RUN pip -q install --no-cache-dir -r requirements.txt \
 COPY app.py ./app.py
 COPY templates ./templates
 COPY static/tailwind-output.css ./static/tailwind-output.css
+COPY static/style.css ./static/style.css
 
 EXPOSE 8080
 
