@@ -9,19 +9,20 @@ from flask import (
 import random
 import string
 
+from tenacity import retry, stop_after_attempt
+
 import vertexai
 import vertexai.preview.generative_models as generative_models
 from vertexai.preview.generative_models import GenerativeModel, Image
 
 from google.cloud import storage
 
-
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
 vertexai.init(project="thuya-next-demos", location="us-central1")
 
-
+@retry(stop=stop_after_attempt(5))
 def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
     contents = [
@@ -47,22 +48,7 @@ def generate(wireframe, model, prompt):
 
     response = ""
     for res in responses:
-        try:
-            response += res.text.strip()
-        except ValueError as e:
-            error_mesages = [
-                "Hold up! Gemini's brain is processing too many thoughts at once.",
-                "Gemini overloaded. Switching to idle mode for a recharge.",
-                "Oops! This Gemini's instance glitched. Please try again later.",
-                "Warning: Gemini reached maximum curiosity levels. Pausing for a knowledge download",
-                "Gemini is out! Currently exploring alternate realities. Will return shortly.",
-                "Gemini is tried. It needs a rest. Try again later",
-                "Error 404: Gemini's focus not found. May be distracted by a shiny object.",
-                "Gemini is temporarily unavailable. Please check back after it decides on a course of action.",
-                "Gemini needs a rest. Please come back in a minute."
-            ]
-            random_message = random.choice(error_mesages)
-            return f"<h1> {random_message} </h1>"
+        response += res.text.strip()
     return response
 
 
@@ -99,7 +85,24 @@ def response():
         wireframe = Image.from_bytes(uploaded_image.read())
         model = request.form['model']
         prompt = request.form['prompt'] 
-        response = generate(wireframe, model, prompt)
+
+        try:
+            response = generate(wireframe, model, prompt)
+
+        except ValueError as e:
+            error_mesages = [
+                "Hold up! Gemini's brain is processing too many thoughts at once.",
+                "Gemini overloaded. Switching to idle mode for a recharge.",
+                "Oops! This Gemini's instance glitched. Please try again later.",
+                "Warning: Gemini reached maximum curiosity levels. Pausing for a knowledge download",
+                "Gemini is out! Currently exploring alternate realities. Will return shortly.",
+                "Gemini is tried. It needs a rest. Try again later",
+                "Error 404: Gemini's focus not found. May be distracted by a shiny object.",
+                "Gemini is temporarily unavailable. Please check back after it decides on a course of action.",
+                "Gemini needs a rest. Please come back in a minute."
+            ]
+            random_message = random.choice(error_mesages)
+            response = f"<h1> {random_message} </h1>"
 
         if response:
             public_url = create_public_html_file(response)
@@ -115,4 +118,4 @@ def response():
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=false, port=server_port, host='0.0.0.0')
+    app.run(debug=False, port=server_port, host='0.0.0.0')
