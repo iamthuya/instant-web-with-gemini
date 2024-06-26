@@ -1,5 +1,5 @@
 Flask==2.3.3
-requests==2.31.0
+requests==2.32.0
 debugpy # Required for debugging.
 google-cloud-aiplatform==1.43.0
 google-cloud-storage==2.16.0
