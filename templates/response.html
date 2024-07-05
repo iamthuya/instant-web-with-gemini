@@ -1,31 +1,35 @@
 <!doctype html>
 <html lang=en>
 <head>
-	{% block head %}
-	<meta charset=utf-8>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block head %}
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
-	<title>Result</title>
-	<link rel="icon" type="image/svg+xml" href="https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/favicon.ico" />
-	<link rel="stylesheet" type= "text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-	<link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='tailwind-output.css') }}" >
-	{% endblock %}
+    <title>結果</title>
+    <link rel="icon" type="image/svg+xml"
+        href="https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/favicon.ico" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tailwind-output.css') }}">
+    {% endblock %}
 </head>
 <body>
-	<div class="bg-white">
+    <div class="bg-white">
         <div class="mx-auto max-w-7xl py16">
-            <div class="mx-auto grid max-w-5xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            <div
+                class="mx-auto grid max-w-5xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
                 <div class="lg:pr-8 lg:pt-4 mt-4">
                     <div class="lg:max-w-2lg">
                         <a href="{{ public_url }}" target="_blank">
-                            <iframe src="{{ public_url }}" class="w-full h-[300px] sm:h-[450px] md:h-[600px] lg:h-[450px] xl:h-[600px]"></iframe>
+                            <iframe src="{{ public_url }}"
+                                class="w-full h-[300px] sm:h-[450px] md:h-[600px] lg:h-[450px] xl:h-[600px]"></iframe>
                         </a>
                     </div>
                 </div>
                 <div class="lg:pr-8 lg:pt-4 mt-4">
                     <div class="lg:max-w-lg">
                         <pre>
-                        <code> 
+                        <code>
 {{ response }}
                         </code>
                         </pre>
@@ -33,6 +37,7 @@
                 </div>
             </div>
         </div>
-	</div>
+    </div>
 </body>
+
 </html>

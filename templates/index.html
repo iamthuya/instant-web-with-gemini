@@ -4,13 +4,16 @@
 	<div class="relative isolate px-6 pt-6 lg:px-8 mb-14">
 		<div class="mx-auto max-w-4xl py-32 sm:py-48 lg:py-56">
 			<div class="text-center">
-				<h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">Sketch to Web</h1>
-				<p class="mt-6 text-2xl leading-9 text-gray-600">Try turning static wireframes into web pages in an instant with 
-				<a href="https://blog.google/technology/ai/google-gemini-ai/" target="_blank"><span class="font-bold">Gemini</span></a>'s 
-				revolutionary multimodality features. Our innovative AI technology empowers you to bridge the gap between design and development seamlessly, streamlining your workflow and accelerating your project timelines.</p>
+				<h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">Instant Web with Gemini</h1>
+				<p class="mt-6 text-2xl leading-9 text-gray-600">
+					<a href="https://blog.google/technology/ai/google-gemini-ai/" target="_blank"><span
+							class="font-bold">Gemini</span></a>の革命的なマルチモダリティ機能を使って、静的な手書きのワイヤーフレームを一瞬でウェブページに変換してみてください。
+					Geminiの革新的なAIテクノロジーは、デザインと開発のギャップをシームレスに埋め、ワークフローを合理化し、プロジェクトのタイムラインを加速します。
+				</p>
 				<div class="col-span-full mt-10">
 					<div class="mt-10 flex items-center justify-center gap-x-6">
-						<a href="#generate" class="single-element rounded-md bg-indigo-600 px-3.5 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get Started</a>
+						<a href="#generate"
+							class="single-element rounded-md bg-indigo-600 px-3.5 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">試してみる</a>
 					</div>
 				</div>
 			</div>
@@ -22,89 +25,124 @@
 		<div class="relative isolate px-6 pt-6 lg:px-8">
 			<div class="mx-auto max-w-7xl py-32 sm:py-48 lg:py-56 text-center">
 				<form action="/response" target="_blank" method="post" enctype=multipart/form-data>
-				<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Experience Gemini Multimodality</h1>
-				<div class="mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-					<div class="lg:pl-4 lg:pt-4 mt-4">
-						<div class="lg:max-w-lg">
-							<div class="mt-6 flex items-center justify-center w-full" id="drop-area">
-								<label for="image-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-100 hover:border-gray-100 dark:hover:border-gray-100">
-									<div class="flex flex-col items-center justify-center pt-5 pb-6">
-										<svg class="animate-bounce w-8 h-8 mb-4 text-indigo-600 dark:text-indigo-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-											<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-										</svg>
-										<p class="mb-2 text-xl text-indigo-600 dark:text-indigo-600"><span class="font-semibold">Click to upload a wireframe</span></p>
-										<p class="text-xs text-indigo-600 dark:text-indigo-600">(PNG or JPG only)</p>
+					<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Geminiのマルチモーダル機能を体験</h1>
+					<div
+						class="mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+						<div class="lg:pl-4 lg:pt-4 mt-4">
+							<div class="lg:max-w-lg">
+								<div class="mt-6 flex items-center justify-center w-full" id="drop-area">
+									<label for="image-upload"
+										class="flex flex-col items-center justify-center w-full h-64 border-2 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-100 hover:border-gray-100 dark:hover:border-gray-100">
+										<div class="flex flex-col items-center justify-center pt-5 pb-6">
+											<svg class="animate-bounce w-8 h-8 mb-4 text-indigo-600 dark:text-indigo-600"
+												aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+												viewBox="0 0 20 16">
+												<path stroke="currentColor" stroke-linecap="round"
+													stroke-linejoin="round" stroke-width="2"
+													d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+											</svg>
+											<p class="mb-2 text-xl text-indigo-600 dark:text-indigo-600"><span
+													class="font-semibold">Click to upload a wireframe</span></p>
+											<p class="text-xs text-indigo-600 dark:text-indigo-600">(PNG or JPG only)
+											</p>
+										</div>
+										<input id="image-upload" name="image-upload" type="file"
+											accept="image/png, image/jpeg" class="hidden" />
+									</label>
+								</div>
+							</div>
+							<div class="flex items-center justify-center lg:max-w-lg">
+								<div class="mt-6 max-w-md w-full hidden" id="preview-area"></div>
+							</div>
+						</div>
+						<div class="lg:pr-4 lg:pt-5">
+							<div class="lg:max-w-lg text-left" id="instruction-container">
+								<dl class="mt-16 max-w-xl space-y-8 text-lg leading-7 text-gray-600 lg:max-w-none">
+									<div class="relative pl-9">
+										<dt class="inline font-semibold text-gray-900">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+												fill="currentColor"
+												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
+												<path
+													d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+												<path
+													d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+											</svg>
+											Step 1: ウェブページの基本的なレイアウトを描く
+										</dt>
 									</div>
-									<input id="image-upload" name="image-upload" type="file" accept="image/png, image/jpeg" class="hidden" />
-								</label>
+									<div class="relative pl-9">
+										<dt class="inline font-semibold text-gray-900">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+												fill="currentColor"
+												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
+												<path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z" />
+												<path fill-rule="evenodd"
+													d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+													clip-rule="evenodd" />
+											</svg>
+											Step 2: レイアウトの写真を撮る。
+										</dt>
+									</div>
+									<div class="relative pl-9">
+										<dt class="inline font-semibold text-gray-900">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+												fill="currentColor"
+												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
+												<path fill-rule="evenodd"
+													d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875Zm6.905 9.97a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72V18a.75.75 0 0 0 1.5 0v-4.19l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z"
+													clip-rule="evenodd" />
+												<path
+													d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+											</svg>
+											Step 3: 写真をウェブサイトにアップロードする。
+										</dt>
+									</div>
+									<div class="relative pl-9">
+										<dt class="inline font-semibold text-gray-900">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+												fill="currentColor"
+												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
+												<path fill-rule="evenodd"
+													d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
+													clip-rule="evenodd" />
+											</svg>
+											Step 4: ウェブページに命を吹き込もう！
+										</dt>
+									</div>
+								</dl>
 							</div>
-						</div>
-						<div class="flex items-center justify-center lg:max-w-lg">
-							<div class="mt-6 max-w-md w-full hidden" id="preview-area"></div>
-						</div>
-					</div>
-					<div class="lg:pr-4 lg:pt-5">
-						<div class="lg:max-w-lg text-left" id="instruction-container">
-							<dl class="mt-16 max-w-xl space-y-8 text-lg leading-7 text-gray-600 lg:max-w-none">
-								<div class="relative pl-9">
-									<dt class="inline font-semibold text-gray-900">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
-											<path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-											<path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-										</svg>
-										Step 1: Draw a basic layout of your webpage.
-									</dt>
-								</div>
-								<div class="relative pl-9">
-									<dt class="inline font-semibold text-gray-900">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
-											<path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z" />
-											<path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
-										</svg>
-										Step 2: Snap a picture of your layout.
-									</dt>
-								</div>
-								<div class="relative pl-9">
-									<dt class="inline font-semibold text-gray-900">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
-											<path fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875Zm6.905 9.97a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72V18a.75.75 0 0 0 1.5 0v-4.19l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
-											<path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-										</svg>
-										Step 3: Upload the picture to the website.
-									</dt>
-								</div>
-								<div class="relative pl-9">
-									<dt class="inline font-semibold text-gray-900">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
-											<path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" />
-										</svg>
-										Step 4: Bring your webpage to life!
-									</dt>
-								</div>
-							</dl>
-						</div>
-						<div class="lg:max-w-lg text-left mt-8">
-							<div class="hidden flex-wrap min-w-md " id="parameter-container">
-								<!-- Model Select -->
-								<label for="model" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Choose a model:</label>
-								<select id="model" name="model" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-									<option value="gemini-1.0-pro-vision-001" selected>Gemini 1.0 Pro Vision 001</option>
-									<option value="gemini-1.5-pro-preview-0409" selected>Gemini 1.5 Pro Preview 0409</option>
-								</select>
-								
-								  <!-- Prompt Textarea -->
-								<label for="prompt" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Write your prompt:</label>
-								<textarea id="prompt" name="prompt" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your prompt">You are an expert web developer tasked with converting a hand-drawn wireframe into an HTML5 page. Add the Tailwind CSS script tag in <head> section and use it for styling and layout. Add JavaScript for button actions. Include animations as needed. Use placehold.co images as placeholders. Provide response in HTML5 page without denoting with '```html' code block.
+							<div class="lg:max-w-lg text-left mt-8">
+								<div class="hidden flex-wrap min-w-md " id="parameter-container">
+									<!-- Model Select -->
+									<label for="model"
+										class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">モデルを選択する</label>
+									<select id="model" name="model"
+										class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+										<option value="gemini-1.0-pro-vision-001" selected>Gemini 1.0 Pro Vision 001
+										</option>
+										<option value="gemini-1.5-pro-preview-0409" selected>Gemini 1.5 Pro Preview 0409
+										</option>
+									</select>
+
+									<!-- Prompt Textarea -->
+									<label for="prompt"
+										class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">プロンプトを書く</label>
+									<textarea id="prompt" name="prompt" rows="6"
+										class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+										placeholder="Write your prompt">あなたは、手描きのワイヤーフレームをHTML5ページに変換する仕事を任されたウェブ開発のエキスパートです。<head>セクションにTailwind CSS scriptタグを追加し、スタイリングとレイアウトに使用します。ボタンアクション用にJavaScriptを追加します。必要に応じてアニメーションを含めます。プレースホルダとしてplacehold.co画像を使用します。 '```html' コードブロックを使わずに、HTML5ページのレスポンスを提供してください。
 								</textarea>
-							</div>
-							<div class="mt-6 items-center justify-center gap-x-6 hidden" id="button-container">
-								<input type="button" value="Reset" onClick="resetForm()" id="reset-button" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">									
-								<input type="submit" value="Generate" id="generate-button" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+								</div>
+								<div class="mt-6 items-center justify-center gap-x-6 hidden" id="button-container">
+									<input type="button" value="Reset" onClick="resetForm()" id="reset-button"
+										class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+									<input type="submit" value="Generate" id="generate-button"
+										class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+								</div>
 							</div>
 						</div>
+
 					</div>
-					
-				</div>
 				</form>
 			</div>
 		</div>
@@ -114,58 +152,58 @@
 
 {% block script %}
 <script>
-const dropArea = document.getElementById("drop-area")
-const imageInput = document.getElementById("image-upload")
-const previewArea = document.getElementById("preview-area")
-const instructionContainer = document.getElementById("instruction-container")
-const parameterContainer = document.getElementById("parameter-container")
-const buttonContainer = document.getElementById("button-container")
+	const dropArea = document.getElementById("drop-area")
+	const imageInput = document.getElementById("image-upload")
+	const previewArea = document.getElementById("preview-area")
+	const instructionContainer = document.getElementById("instruction-container")
+	const parameterContainer = document.getElementById("parameter-container")
+	const buttonContainer = document.getElementById("button-container")
 
-// Prevent default drag behaviors
-;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-	dropArea.addEventListener(eventName, preventDefaults, false)   
-	document.body.addEventListener(eventName, preventDefaults, false)
-})
+		// Prevent default drag behaviors
+		;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+			dropArea.addEventListener(eventName, preventDefaults, false)
+			document.body.addEventListener(eventName, preventDefaults, false)
+		})
 
-function preventDefaults (e) {
-	e.preventDefault()
-	e.stopPropagation()
-}
-
-// Handle upload files
-imageInput.addEventListener('change', handleUpload, false)
-function handleUpload(event) {
-	let file = event.target.files[0];
-	showPreview(file)
-}
-
-// Preview file
-function showPreview(file) {
-	dropArea.style.display = 'none'
-	instructionContainer.style.display = 'none'
-
-	parameterContainer.style.display = 'flex'
-	buttonContainer.style.display = 'flex'
-	previewArea.style.display = 'flex'
-
-	let reader = new FileReader()
-	reader.readAsDataURL(file)
-	reader.onloadend = function() {
-		let img = document.createElement('img')
-		img.src = reader.result
-		previewArea.appendChild(img)
+	function preventDefaults(e) {
+		e.preventDefault()
+		e.stopPropagation()
 	}
-}
 
-// Reset the form
-function resetForm() {
-	previewArea.innerHTML = ''
-	instructionContainer.style.display = 'flex'
-	dropArea.style.display = 'flex'
+	// Handle upload files
+	imageInput.addEventListener('change', handleUpload, false)
+	function handleUpload(event) {
+		let file = event.target.files[0];
+		showPreview(file)
+	}
 
-	previewArea.style.display = 'none'
-	parameterContainer.style.display = 'none'
-	buttonContainer.style.display = 'none'
-}
+	// Preview file
+	function showPreview(file) {
+		dropArea.style.display = 'none'
+		instructionContainer.style.display = 'none'
+
+		parameterContainer.style.display = 'flex'
+		buttonContainer.style.display = 'flex'
+		previewArea.style.display = 'flex'
+
+		let reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onloadend = function() {
+			let img = document.createElement('img')
+			img.src = reader.result
+			previewArea.appendChild(img)
+		}
+	}
+
+	// Reset the form
+	function resetForm() {
+		previewArea.innerHTML = ''
+		instructionContainer.style.display = 'flex'
+		dropArea.style.display = 'flex'
+
+		previewArea.style.display = 'none'
+		parameterContainer.style.display = 'none'
+		buttonContainer.style.display = 'none'
+	}
 </script>
 {% endblock %}
