@@ -1,21 +1,13 @@
 import os
-from flask import (
-    Flask, 
-    render_template, 
-    request,
-    redirect
-)
-
 import random
 import string
 
-from tenacity import retry, stop_after_attempt
-
 import vertexai
 import vertexai.preview.generative_models as generative_models
-from vertexai.preview.generative_models import GenerativeModel, Image
-
+from flask import Flask, redirect, render_template, request
 from google.cloud import storage
+from tenacity import retry, stop_after_attempt
+from vertexai.preview.generative_models import GenerativeModel, Image
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
@@ -29,7 +21,7 @@ def generate(wireframe, model, prompt):
         wireframe,
         prompt
     ]
-    
+
     responses = model.generate_content(
         contents=contents,
         generation_config = {
@@ -84,22 +76,22 @@ def response():
         uploaded_image = request.files['image-upload']
         wireframe = Image.from_bytes(uploaded_image.read())
         model = request.form['model']
-        prompt = request.form['prompt'] 
+        prompt = request.form['prompt']
 
         try:
             response = generate(wireframe, model, prompt)
 
         except ValueError as e:
             error_mesages = [
-                "Hold up! Gemini's brain is processing too many thoughts at once.",
-                "Gemini overloaded. Switching to idle mode for a recharge.",
-                "Oops! This Gemini's instance glitched. Please try again later.",
-                "Warning: Gemini reached maximum curiosity levels. Pausing for a knowledge download",
-                "Gemini is out! Currently exploring alternate realities. Will return shortly.",
-                "Gemini is tried. It needs a rest. Try again later",
-                "Error 404: Gemini's focus not found. May be distracted by a shiny object.",
-                "Gemini is temporarily unavailable. Please check back after it decides on a course of action.",
-                "Gemini needs a rest. Please come back in a minute."
+                "Geminiの脳は一度にたくさんのことを処理しすぎています。少々お待ち下さい。",
+                "Geminiは過負荷です。休息のためにアイドルモードに切り替えました。",
+                "おっと！Geminiのインスタンスに不具合が発生しました。後でもう一度お試しください。",
+                "警告：Geminiは好奇心のレベルが最大に達しました。知識をダウンロードするため一時停止します。",
+                "Geminiは退室中！現在、代替現実を探索中。まもなく戻ります。",
+                "Geminiは試されています。休息が必要です。後で再挑戦しましょう。",
+                "Error 404: Geminiの焦点が定まらない。光るものに気を取られるかもしれない。",
+                "Geminiは一時的に利用できません。また後ほどご確認ください。",
+                "Geminiには休息が必要です。またあとで試してみてください。"
             ]
             random_message = random.choice(error_mesages)
             response = f"<h1> {random_message} </h1>"
@@ -108,9 +100,9 @@ def response():
             public_url = create_public_html_file(response)
 
             return render_template(
-                'response.html', 
-                response=response, 
-                public_url=public_url, 
+                'response.html',
+                response=response,
+                public_url=public_url,
             )
     else:
         return redirect('/')
