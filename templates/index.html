@@ -1,25 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-<section id="landing" class="h-screen flex items-center justify-center">
-	<div class="relative isolate px-6 pt-6 lg:px-8 mb-14">
-		<div class="mx-auto max-w-4xl py-32 sm:py-48 lg:py-56">
-			<div class="text-center">
-				<h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">Instant Web with Gemini</h1>
-				<p class="mt-6 text-2xl leading-9 text-gray-600">
-					<a href="https://blog.google/technology/ai/google-gemini-ai/" target="_blank"><span
-							class="font-bold">Gemini</span></a>の革命的なマルチモダリティ機能を使って、静的な手書きのワイヤーフレームを一瞬でウェブページに変換してみてください。
-					Geminiの革新的なAIテクノロジーは、デザインと開発のギャップをシームレスに埋め、ワークフローを合理化し、プロジェクトのタイムラインを加速します。
-				</p>
-				<div class="col-span-full mt-10">
-					<div class="mt-10 flex items-center justify-center gap-x-6">
-						<a href="#generate"
-							class="single-element rounded-md bg-indigo-600 px-3.5 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">試してみる</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 <section id="generate" class="h-screen flex items-center justify-center">
 	<div class="overflow-hidden py-24 sm:py-32 mb-20">
 		<div class="relative isolate px-6 pt-6 lg:px-8">
@@ -31,26 +11,25 @@
 						<div class="lg:pl-4 lg:pt-4 mt-4">
 							<div class="lg:max-w-lg">
 								<div class="mt-6 flex items-center justify-center w-full" id="drop-area">
-									<label for="camera-data"
-										class="flex flex-col items-center justify-center w-full h-64 border-2 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-100 hover:border-gray-100 dark:hover:border-gray-100">
-										<div class="camera">
-											<video id="video">Video stream not available.</video>
-											<button id="start-button">Take photo</button>
-										</div>
-										<canvas id="canvas"></canvas>
-										<input type="file" id="camera-data" accept="image/*" class="hidden">
-									</label>
+									<div id="camera"
+										class="flex flex-col items-center justify-center w-full h-full border-2 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-100 hover:border-gray-100 dark:hover:border-gray-100">
+											<video id="video" class="h-full w-full rounded-lg">Video stream is not available!</video>
+									</div>
 								</div>
 							</div>
 							<div class="flex items-center justify-center lg:max-w-lg">
-								<div class="mt-6 max-w-md w-full hidden" id="preview-area"></div>
+								<canvas class="mt-6 max-w-md w-full hidden" id="canvas"></canvas>
 							</div>
 						</div>
-						<div class="lg:pr-4 lg:pt-5">
+						<div class="lg:pr-4 lg:pt-2">
 							<div class="lg:max-w-lg text-left" id="instruction-container">
-								<dl class="mt-16 max-w-xl space-y-8 text-lg leading-7 text-gray-600 lg:max-w-none">
-									<div class="relative pl-9">
-										<dt class="inline font-semibold text-gray-900">
+								<dl class="mt-16 max-w-xl space-y-8 leading-7 text-gray-600 text-xl antialiased lg:max-w-none">
+									<div class="relative font-semibold text-gray-900">
+										Here is a short description
+									</div>
+
+									<div class="relative pl-10">
+										<dt class="inline font-semibold">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 												fill="currentColor"
 												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
@@ -62,8 +41,8 @@
 											Step 1: ウェブページの基本的なレイアウトを描く
 										</dt>
 									</div>
-									<div class="relative pl-9">
-										<dt class="inline font-semibold text-gray-900">
+									<div class="relative pl-10">
+										<dt class="inline font-semibold">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 												fill="currentColor"
 												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
@@ -75,22 +54,8 @@
 											Step 2: レイアウトの写真を撮る。
 										</dt>
 									</div>
-									<div class="relative pl-9">
-										<dt class="inline font-semibold text-gray-900">
-											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-												fill="currentColor"
-												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
-												<path fill-rule="evenodd"
-													d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875Zm6.905 9.97a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72V18a.75.75 0 0 0 1.5 0v-4.19l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z"
-													clip-rule="evenodd" />
-												<path
-													d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-											</svg>
-											Step 3: 写真をウェブサイトにアップロードする。
-										</dt>
-									</div>
-									<div class="relative pl-9">
-										<dt class="inline font-semibold text-gray-900">
+									<div class="relative pl-10">
+										<dt class="inline font-semibold">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 												fill="currentColor"
 												class="absolute left-1 top-0.5 w-6 h-6 text-indigo-600">
@@ -98,11 +63,27 @@
 													d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
 													clip-rule="evenodd" />
 											</svg>
-											Step 4: ウェブページに命を吹き込もう！
+											Step 3: ウェブページに命を吹き込もう！
 										</dt>
 									</div>
+									<!-- <div class="relative pl-10">
+										<input type="button" value="Get Started" onClick="takePicture()" id=""
+										class="rounded-md bg-indigo-600 px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+										<input type="submit" value="Generate" id="generate-btn"
+										class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+									</div> -->
 								</dl>
+								<!-- <div class="flex text-center">
+									<div class="col-span-full mt-10">
+										<div class="mt-10 flex items-center justify-center gap-x-6">
+											<a href="#generate" class="single-element rounded-md bg-indigo-600 px-3.5 py-2.5 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get Started</a>
+										</div>
+									</div>
+								</div> -->
 							</div>
+							<input type="button" value="Get Started" id="start-button"
+							class="rounded-md bg-indigo-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+							
 							<div class="lg:max-w-lg text-left mt-8">
 								<div class="hidden flex-wrap min-w-md " id="parameter-container">
 									<!-- Model Select -->
@@ -110,9 +91,9 @@
 										class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">モデルを選択する</label>
 									<select id="model" name="model"
 										class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-										<option value="gemini-1.0-pro-vision-001" selected>Gemini 1.0 Pro Vision 001
+										<option value="gemini-1.5-flash-001" selected>Gemini 1.5 Flash 001
 										</option>
-										<option value="gemini-1.5-pro-preview-0409" selected>Gemini 1.5 Pro Preview 0409
+										<option value="gemini-1.5-pro-001" selected>Gemini 1.5 Pro 001
 										</option>
 									</select>
 
@@ -148,13 +129,13 @@
 	// - https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos
 	(() => {
 		// initial values
-		const width = 320;
+		let width = 0;
 		let height = 0;
 		let streaming = false;
 		let video = null;
 		let canvas = null;
 		let photo = null;
-		let startButton = null;
+		let takePictureButton = null;
 		let capturedData = null;
 
 		const preventDefaults = (e) => {
@@ -162,17 +143,17 @@
 			e.stopPropagation()
 		};
 
-		const dropArea = document.getElementById("drop-area");
-		const previewArea = document.getElementById("preview-area");
+		// const dropArea = document.getElementById("drop-area");
+		// const previewArea = document.getElementById("preview-area");
 		const instructionContainer = document.getElementById("instruction-container");
 		const parameterContainer = document.getElementById("parameter-container");
 		const buttonContainer = document.getElementById("button-container");
 
 		// Prevent default drag behaviors
-		;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-			dropArea.addEventListener(eventName, preventDefaults, false)
-			document.body.addEventListener(eventName, preventDefaults, false)
-		})
+		// ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+		// 	dropArea.addEventListener(eventName, preventDefaults, false)
+		// 	document.body.addEventListener(eventName, preventDefaults, false)
+		// })
 
 		const clearPhoto = () => {
 			const context = canvas.getContext("2d");
@@ -195,12 +176,9 @@
 
 		// Preview file
 		const showPreview = (file) => {
-			dropArea.style.display = 'none'
 			instructionContainer.style.display = 'none'
-
 			parameterContainer.style.display = 'flex'
 			buttonContainer.style.display = 'flex'
-			previewArea.style.display = 'flex'
 
 			let reader = new FileReader()
 			reader.readAsDataURL(file)
@@ -213,11 +191,7 @@
 
 		// Reset the form
 		const resetForm = () => {
-			previewArea.innerHTML = ''
 			instructionContainer.style.display = 'flex'
-			dropArea.style.display = 'flex'
-
-			previewArea.style.display = 'none'
 			parameterContainer.style.display = 'none'
 			buttonContainer.style.display = 'none'
 		}
@@ -239,7 +213,7 @@
 				});
 
 			video.addEventListener(
-				"canplay",
+				"camplay",
 				(ev) => {
 					if (!streaming) {
 						height = video.videoHeight / (video.videoWidth / width);
