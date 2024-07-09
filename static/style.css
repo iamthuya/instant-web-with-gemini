@@ -8,7 +8,7 @@
     20%, 100% { transform: translateX(150%); }
 }
 
-.single-element {
+.hero-button {
     position: relative;
     width: 200px;
     padding: 30px;

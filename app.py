@@ -73,8 +73,7 @@ def create_public_html_file(html_content):
 @app.route('/response', methods=['GET', 'POST'])
 def response():
     if request.method == 'POST':
-        uploaded_image = request.files['image-upload']
-        wireframe = Image.from_bytes(uploaded_image.read())
+        wireframe = request.form['capturedImage']
         model = request.form['model']
         prompt = request.form['prompt']
 
