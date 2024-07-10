@@ -12,8 +12,6 @@ from vertexai.preview.generative_models import GenerativeModel, Image
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
-vertexai.init(project="thuya-next-demos", location="us-central1")
-
 @retry(stop=stop_after_attempt(5))
 def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
@@ -109,4 +107,8 @@ def response():
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
+    location = os.environ.get('LOCATION', "us-central1")
+    project_id = os.environ.get('PROJECT_ID', "thuya-next-demos")
+    vertexai.init(project=project_id, location=location)
+
     app.run(debug=True, port=server_port, host='0.0.0.0')
