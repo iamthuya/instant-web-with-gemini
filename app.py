@@ -9,7 +9,7 @@ from flask import (
 import random
 import string
 
-from tenacity import retry, stop_after_attempt
+from tenacity import retry, wait_random, stop_after_attempt
 
 import vertexai
 import vertexai.preview.generative_models as generative_models
@@ -22,19 +22,22 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
 vertexai.init(project="thuya-next-demos", location="us-central1")
 
-@retry(stop=stop_after_attempt(5))
+@retry(wait=wait_random(min=2, max=4), stop=stop_after_attempt(20))
 def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
+    suffix = "Just provide the code without the explaination."
+    
     contents = [
         wireframe,
-        prompt
+        prompt,
+        suffix
     ]
     
     responses = model.generate_content(
         contents=contents,
         generation_config = {
             "max_output_tokens": 2048,
-            "temperature": 0.6,
+            "temperature": 0.5,
             "top_p": 0.8,
         },
         safety_settings = {
@@ -66,7 +69,7 @@ def create_public_html_file(html_content):
         filename = ''.join(random.choice(characters) for i in range(length))
         return filename + ".html"
 
-    bucket_name = "sketch-to-web"
+    bucket_name = "instant-web-with-gemini-sites"
     filename = generate_random_filename()
 
     storage_client = storage.Client()
@@ -88,6 +91,7 @@ def response():
 
         try:
             response = generate(wireframe, model, prompt)
+            response = response.replace("```html", "").replace("```", "").strip()
 
         except ValueError as e:
             error_mesages = [
@@ -101,6 +105,7 @@ def response():
                 "Gemini is temporarily unavailable. Please check back after it decides on a course of action.",
                 "Gemini needs a rest. Please come back in a minute."
             ]
+            print(e)
             random_message = random.choice(error_mesages)
             response = f"<h1> {random_message} </h1>"
 
