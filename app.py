@@ -22,7 +22,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
 vertexai.init(project="thuya-next-demos", location="us-central1")
 
-@retry(wait=wait_random(min=2, max=4), stop=stop_after_attempt(20))
+@retry(wait=wait_random(min=1, max=2), stop=stop_after_attempt(10))
 def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
     suffix = "Just provide the code without the explaination."
@@ -36,9 +36,9 @@ def generate(wireframe, model, prompt):
     responses = model.generate_content(
         contents=contents,
         generation_config = {
-            "max_output_tokens": 2048,
-            "temperature": 0.5,
-            "top_p": 0.8,
+            "max_output_tokens": 8192,
+            "temperature": 1,
+            "top_p": 0.95,
         },
         safety_settings = {
             generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
