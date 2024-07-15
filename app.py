@@ -22,7 +22,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
 vertexai.init(project="thuya-next-demos", location="us-central1")
 
-@retry(wait=wait_random(min=1, max=2), stop=stop_after_attempt(10))
+@retry(wait=wait_random(min=3, max=4), stop=stop_after_attempt(30))
 def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
     suffix = "Just provide the code without the explaination."
@@ -41,10 +41,10 @@ def generate(wireframe, model, prompt):
             "top_p": 0.95,
         },
         safety_settings = {
-            generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
-            generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
-            generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
-            generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+            generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_NONE,
+            generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_NONE,
+            generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_NONE,
+            generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_NONE,
         },
         stream=True,
     )
@@ -69,8 +69,9 @@ def create_public_html_file(html_content):
         filename = ''.join(random.choice(characters) for i in range(length))
         return filename + ".html"
 
-    bucket_name = "instant-web-with-gemini-sites"
-    filename = generate_random_filename()
+    bucket_name = "instant-web-gemini"
+    random_filename = generate_random_filename()
+    filename = f"io-connect-blr/web-pages/{random_filename}"
 
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
