@@ -94,7 +94,7 @@ def response():
             response = generate(wireframe, model, prompt)
             response = response.replace("```html", "").replace("```", "").strip()
 
-        except ValueError as e:
+        except Exception as e:
             error_mesages = [
                 "Hold up! Gemini's brain is processing too many thoughts at once.",
                 "Gemini overloaded. Switching to idle mode for a recharge.",
