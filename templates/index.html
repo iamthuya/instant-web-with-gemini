@@ -98,9 +98,9 @@
 									class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-900">モデルを選択する</label>
 								<select id="model" name="model"
 									class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-									<option value="gemini-1.5-flash-001">Gemini 1.5 Flash 001
+									<option value="gemini-1.5-flash-001" selected>Gemini 1.5 Flash 001
 									</option>
-									<option value="gemini-1.5-pro-001" selected>Gemini 1.5 Pro 001
+									<option value="gemini-1.5-pro-001">Gemini 1.5 Pro 001
 									</option>
 								</select>
 								<!-- Prompt Textarea -->
@@ -170,6 +170,7 @@
 		hiddenInput.type = 'hidden';
 		hiddenInput.name = 'capturedImage';
 		hiddenInput.value = base64Image;
+		console.log(base64Image)
 
 		generateForm.appendChild(hiddenInput);
 	});
