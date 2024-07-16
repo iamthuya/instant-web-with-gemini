@@ -14,6 +14,13 @@ from vertexai.preview.generative_models import GenerativeModel, Part
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
+PORT = os.environ.get('PORT', '8080')
+LOCATION = os.environ.get('LOCATION', "us-central1")
+PROJECT_ID = os.environ.get('PROJECT_ID', "thuya-next-demos")
+GCS_BUCKET_NAME = os.environ.get('GCS_BUCKET_NAME', "instant-web-gemini")
+GCS_FOLDER_NAME = os.environ.get('GCS_FOLDER_NAME', "next-tokyo-2024")
+
+vertexai.init(project=PROJECT_ID, location=LOCATION)
 
 @retry(wait=wait_random(min=2, max=4), stop=stop_after_attempt(30))
 def generate(wireframe, model, prompt):
@@ -106,7 +113,7 @@ def response():
             response = generate(wireframe, model, prompt)
             response = response.replace("```html", "").replace("```", "").strip()
 
-        except ValueError as e:
+        except Exception as e:
             error_mesages = [
                 "Geminiの脳は一度にたくさんのことを処理しすぎています。少々お待ち下さい。",
                 "Geminiは過負荷です。休息のためにアイドルモードに切り替えました。",
@@ -134,11 +141,4 @@ def response():
 
 
 if __name__ == '__main__':
-    PORT = os.environ.get('PORT', '8080')
-    LOCATION = os.environ.get('LOCATION', "us-central1")
-    PROJECT_ID = os.environ.get('PROJECT_ID', "thuya-next-demos")
-    GCS_BUCKET_NAME = os.environ.get('GCS_BUCKET_NAME', "instant-web-gemini")
-    GCS_FOLDER_NAME = os.environ.get('GCS_FOLDER_NAME', "next-tokyo-2024")
-
-    vertexai.init(project=PROJECT_ID, location=LOCATION)
     app.run(debug=False, port=PORT, host='0.0.0.0')
