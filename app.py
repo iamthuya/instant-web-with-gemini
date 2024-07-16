@@ -14,6 +14,13 @@ from vertexai.preview.generative_models import GenerativeModel, Part
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
 
+PORT = os.environ.get('PORT', '8080')
+LOCATION = os.environ.get('LOCATION', "us-central1")
+PROJECT_ID = os.environ.get('PROJECT_ID', "thuya-next-demos")
+GCS_BUCKET_NAME = os.environ.get('GCS_BUCKET_NAME', "instant-web-gemini")
+GCS_FOLDER_NAME = os.environ.get('GCS_FOLDER_NAME', "io-connect-blr-2024")
+
+vertexai.init(project=PROJECT_ID, location=LOCATION)
 
 @retry(wait=wait_random(min=2, max=4), stop=stop_after_attempt(30))
 def generate(wireframe, model, prompt):
@@ -106,17 +113,17 @@ def response():
             response = generate(wireframe, model, prompt)
             response = response.replace("```html", "").replace("```", "").strip()
 
-        except ValueError as e:
+        except Exception as e:
             error_mesages = [
-                "Geminiの脳は一度にたくさんのことを処理しすぎています。少々お待ち下さい。",
-                "Geminiは過負荷です。休息のためにアイドルモードに切り替えました。",
-                "おっと！Geminiのインスタンスに不具合が発生しました。後でもう一度お試しください。",
-                "警告：Geminiは好奇心のレベルが最大に達しました。知識をダウンロードするため一時停止します。",
-                "Geminiは退室中！現在、代替現実を探索中。まもなく戻ります。",
-                "Geminiは試されています。休息が必要です。後で再挑戦しましょう。",
-                "Error 404: Geminiの焦点が定まらない。光るものに気を取られるかもしれない。",
-                "Geminiは一時的に利用できません。また後ほどご確認ください。",
-                "Geminiには休息が必要です。またあとで試してみてください。"
+                "Hold up! Gemini's brain is processing too many thoughts at once.",
+                "Gemini overloaded. Switching to idle mode for a recharge.",
+                "Oops! This Gemini's instance glitched. Please try again later.",
+                "Warning: Gemini reached maximum curiosity levels. Pausing for a knowledge download",
+                "Gemini is out! Currently exploring alternate realities. Will return shortly.",
+                "Gemini is tried. It needs a rest. Try again later",
+                "Error 404: Gemini's focus not found. May be distracted by a shiny object.",
+                "Gemini is temporarily unavailable. Please check back after it decides on a course of action.",
+                "Gemini needs a rest. Please come back in a minute."
             ]
             random_message = random.choice(error_mesages)
             response = f"<h1> {random_message} </h1>"
@@ -134,11 +141,4 @@ def response():
 
 
 if __name__ == '__main__':
-    PORT = os.environ.get('PORT', '8080')
-    LOCATION = os.environ.get('LOCATION', "us-central1")
-    PROJECT_ID = os.environ.get('PROJECT_ID', "thuya-next-demos")
-    GCS_BUCKET_NAME = os.environ.get('GCS_BUCKET_NAME', "instant-web-gemini")
-    GCS_FOLDER_NAME = os.environ.get('GCS_FOLDER_NAME', "next-tokyo-2024")
-
-    vertexai.init(project=PROJECT_ID, location=LOCATION)
-    app.run(debug=False, port=PORT, host='0.0.0.0')
+    app.run(debug=True, port=PORT, host='0.0.0.0')

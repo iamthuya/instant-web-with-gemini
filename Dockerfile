@@ -37,4 +37,4 @@ COPY static/style.css ./static/style.css
 EXPOSE 8080
 
 # Run serve with gunicorn when the container launches
-CMD ["gunicorn", "-w", "4", "--bind", "0.0.0.0:8080", "app:app"] 
+CMD ["gunicorn", "-w", "4", "--timeout", "240", "--bind", "0.0.0.0:8080", "app:app"] 

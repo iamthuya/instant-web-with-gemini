@@ -3,7 +3,7 @@
 <section id="landing" class="h-screen flex items-center justify-center pb-20">
 	<div class="relative isolate lg:px-8">
 		<div class="mx-auto max-w-7xl py-32 sm:py-48 lg:py-56 text-center">
-			<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Geminiのマルチモーダル機能を体験</h1>
+			<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Instant Web with Gemini</h1>
 			<div
 				class="mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
 				<div class="lg:pl-4 lg:pt-4 mt-4">
@@ -23,7 +23,7 @@
 							<dl
 								class="mt-16 max-w-xl space-y-8 leading-7 text-gray-600 text-xl antialiased lg:max-w-none">
 								<div class="relative font-semibold text-gray-900">
-									Geminiモデルを使って、あなたのウェブサイトのビジョンを3つの簡単なステップで実現しましょう。
+									Turn your website vision into reality in 3 simple steps:
 								</div>
 								<div class="relative pl-8">
 									<dt class="inline font-semibold">
@@ -34,7 +34,7 @@
 											<path
 												d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
 										</svg>
-										Step 1: ウェブページの基本的なレイアウトを描く
+										Step 1: Sketch your website's layout
 									</dt>
 								</div>
 								<div class="relative pl-8">
@@ -46,7 +46,7 @@
 												d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
 												clip-rule="evenodd" />
 										</svg>
-										Step 2: レイアウトの写真を撮る。
+										Step 2: Snap a photo of your sketch
 									</dt>
 								</div>
 								<div class="relative pl-8">
@@ -57,13 +57,13 @@
 												d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
 												clip-rule="evenodd" />
 										</svg>
-										Step 3: ウェブページに命を吹き込もう！
+										Step 3: Let Gemini bring your website to life!
 									</dt>
 								</div>
 							</dl>
 						</div>
 						<div class="lg:max-w-lg text-left mt-8">
-							<input type="button" value="スタート!" id="captureButton" onclick="location.href='#generate'"
+							<input type="button" value="Get Started" id="captureButton" onclick="location.href='#generate'"
 								class="rounded-md w-full bg-indigo-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 	<div class="relative isolate lg:px-8">
 		<div class="mx-auto max-w-7xl py-32 sm:py-48 lg:py-56 text-center">
 			<form id="generateForm" action="/response" target="_blank" method="post" enctype=multipart/form-data>
-				<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Geminiのマルチモーダル機能を体験</h1>
+				<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Instant Web with Gemini</h1>
 				<div
 					class="mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
 					<div class="lg:pl-4 lg:pt-4 mt-4">
@@ -95,23 +95,25 @@
 							<div class="flex-wrap min-w-md" id="parameterContainer">
 								<!-- Model Select -->
 								<label for="model"
-									class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-900">モデルを選択する</label>
+									class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-900">Choose a model:</label>
 								<select id="model" name="model"
 									class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 									<option value="gemini-1.5-flash-001" selected>Gemini 1.5 Flash 001
 									</option>
 									<option value="gemini-1.5-pro-001">Gemini 1.5 Pro 001
 									</option>
+									<option value="gemini-1.0-pro-vision-001">Gemini 1.0 Pro Vision 001
+									</option>
 								</select>
 								<!-- Prompt Textarea -->
 								<label for="prompt"
-									class="block mt-4 mb-2 text-md font-medium text-gray-900 dark:text-gray-900">プロンプトを書く</label>
+									class="block mt-4 mb-2 text-md font-medium text-gray-900 dark:text-gray-900">Write your prompt:</label>
 								<textarea id="prompt" name="prompt" rows="7"
 									class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-									placeholder="Write your prompt">あなたは、手描きのワイヤーフレームをHTML5ページに変換する仕事を任されたウェブ開発のエキスパートです。<head>セクションにTailwind CSS scriptタグを追加し、スタイリングとレイアウトに使用します。ボタンアクション用にJavaScriptを追加します。必要に応じてアニメーションを含めます。プレースホルダとしてplacehold.co画像を使用します。 '```html' コードブロックを使わずに、HTML5ページのレスポンスを提供してください。</textarea>
+									placeholder="Write your prompt">Transform the provided hand-drawn wireframe into an HTML page. Include CSS code for style and layout. Add JavaScript function for buttons.</textarea>
 							</div>
 							<div class="mt-4 justify-left gap-x-6" id="generateButtonContainer">
-								<input type="submit" value="ジェネレート!" id="generateButton"
+								<input type="submit" value="Generate!" id="generateButton"
 									class="rounded-md w-full bg-indigo-600 px-6 py-4 min-w-5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 							</div>
 						</div>
