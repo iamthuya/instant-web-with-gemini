@@ -110,7 +110,7 @@
 									class="block mt-4 mb-2 text-md font-medium text-gray-900 dark:text-gray-900">Write your prompt:</label>
 								<textarea id="prompt" name="prompt" rows="7"
 									class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-									placeholder="Write your prompt">Transform the provided hand-drawn wireframe into an HTML page. Include CSS code for style and layout. Add JavaScript function for buttons.</textarea>
+									placeholder="Write your prompt">Transform the provided hand-drawn wireframe into an HTML page. Use appropriately sized images from placehold.co as temporary image placeholders. Use CSS code for layout and styling.</textarea>
 							</div>
 							<div class="mt-4 justify-left gap-x-6" id="generateButtonContainer">
 								<input type="submit" value="Generate!" id="generateButton"
@@ -126,6 +126,10 @@
 {% endblock %}
 {% block script %}
 <script>
+	let canvas = document.createElement('canvas');
+	let base64Image = null;
+	let hiddenInput = null;
+	
 	const generateForm = document.getElementById('generateForm');
 	const capturedImage = document.getElementById('capturedImage');
 
@@ -135,11 +139,9 @@
 	const generateButtonContainer = document.getElementById('generateButtonContainer');
 	const captureButtonContainer = document.getElementById('captureButtonContainer');
 
-
 	// *** Webcam related code *** //
 	const video = document.getElementById('video');
 	const captureButton = document.getElementById('captureButton');
-	const canvas = document.createElement('canvas');
 	const previewImage = document.getElementById('previewImage');
 
 	// get webcam feed and play it on video element
@@ -156,24 +158,30 @@
 	captureButton.addEventListener('click', () => {
 		canvas.width = video.videoWidth;
 		canvas.height = video.videoHeight;
-		canvas.getContext('2d').drawImage(video, 0, 0);
-
+		let context = canvas.getContext('2d')
+		context.drawImage(video, 0, 0);
+		base64Image = null;
+		base64Image = canvas.toDataURL('image/jpeg', 1.0);
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		
 		// set preview image
-		previewImage.src = canvas.toDataURL('image/jpeg');
+		previewImage.src = base64Image;
 		previewImage.width = canvas.width * 1.5;
 		previewImage.height = canvas.height * 1.5;
+
+		if (hiddenInput !== null) {
+			hiddenInput.remove();
+			hiddenInput = null;
+		}
 	});
 
 	// generate
 	generateButton.addEventListener('click', (e) => {
 		// Convert to Base64 and add to the form as a hidden input
-		const base64Image = canvas.toDataURL('image/jpeg');
-		const hiddenInput = document.createElement('input');
+		hiddenInput = document.createElement('input');
 		hiddenInput.type = 'hidden';
 		hiddenInput.name = 'capturedImage';
 		hiddenInput.value = base64Image;
-		console.log(base64Image)
-
 		generateForm.appendChild(hiddenInput);
 	});
 

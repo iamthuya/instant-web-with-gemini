@@ -25,20 +25,19 @@ vertexai.init(project=PROJECT_ID, location=LOCATION)
 @retry(wait=wait_random(min=2, max=4), stop=stop_after_attempt(30))
 def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
-    suffix = "Just provide the code without the explaination."
+    suffix = "Only provide the necessary code without any explanation. Avoid fabricating details not present in the wireframe."
 
     contents = [
         wireframe,
         prompt,
         suffix
     ]
-
+    
     responses = model.generate_content(
         contents=contents,
         generation_config = {
             "max_output_tokens": 2048,
-            "temperature": 0.6,
-            "top_p": 0.8,
+            "temperature": 0.0,
         },
         safety_settings = {
             generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
@@ -114,6 +113,7 @@ def response():
             response = response.replace("```html", "").replace("```", "").strip()
 
         except Exception as e:
+            print(e)
             error_mesages = [
                 "Hold up! Gemini's brain is processing too many thoughts at once.",
                 "Gemini overloaded. Switching to idle mode for a recharge.",
@@ -135,10 +135,11 @@ def response():
                 'response.html',
                 response=response,
                 public_url=public_url,
+                input_prompt=prompt,
             )
     else:
         return redirect('/')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=PORT, host='0.0.0.0')
+    app.run(debug=False, port=PORT, host='0.0.0.0')
