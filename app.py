@@ -11,18 +11,17 @@ from tenacity import retry, wait_random, stop_after_attempt
 from vertexai.preview.generative_models import GenerativeModel, Part
 
 
-app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
-
 PORT = os.environ.get('PORT', '8080')
 LOCATION = os.environ.get('LOCATION', "us-central1")
 PROJECT_ID = os.environ.get('PROJECT_ID', "thuya-next-demos")
 GCS_BUCKET_NAME = os.environ.get('GCS_BUCKET_NAME', "instant-web-gemini")
 GCS_FOLDER_NAME = os.environ.get('GCS_FOLDER_NAME', "io-connect-blr-2024")
 
+app = Flask(__name__)
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
-@retry(wait=wait_random(min=2, max=4), stop=stop_after_attempt(30))
+
+@retry(wait=wait_random(min=2, max=3), stop=stop_after_attempt(30))
 def generate(wireframe, model, prompt):
     model = GenerativeModel(model)
     suffix = "Only provide the necessary code without any explanation. Avoid fabricating details not present in the wireframe."
