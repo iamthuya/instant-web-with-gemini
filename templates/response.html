@@ -4,7 +4,6 @@
     {% block head %}
     <meta charset=utf-8>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.tailwindcss.com"></script>
     <title>結果</title>
     <link rel="icon" type="image/svg+xml"
         href="https://www.gstatic.com/devrel-devsite/prod/v0d244f667a3683225cca86d0ecf9b9b81b1e734e55a030bdcd3f3094b835c987/cloud/images/favicons/onecloud/favicon.ico" />
@@ -16,6 +15,9 @@
 <body>
     <div class="bg-white">
         <div class="mx-auto max-w-7xl py16">
+            <div class="mx-auto mt-4">
+                <b>プロンプト:</b> {{ user_prompt }}
+            </div>
             <div
                 class="mx-auto grid max-w-5xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
                 <div class="lg:pr-8 lg:pt-4 mt-4">
