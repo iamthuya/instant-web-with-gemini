@@ -134,7 +134,7 @@ def response():
                 'response.html',
                 response=response,
                 public_url=public_url,
-                input_prompt=prompt,
+                user_prompt=prompt,
             )
     else:
         return redirect('/')

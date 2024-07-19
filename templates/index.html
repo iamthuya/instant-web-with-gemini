@@ -102,8 +102,6 @@
 									</option>
 									<option value="gemini-1.5-pro-001">Gemini 1.5 Pro 001
 									</option>
-									<option value="gemini-1.0-pro-vision-001">Gemini 1.0 Pro Vision 001
-									</option>
 								</select>
 								<!-- Prompt Textarea -->
 								<label for="prompt"
@@ -126,6 +124,17 @@
 {% endblock %}
 {% block script %}
 <script>
+	window.addEventListener('load', function() {
+		// Get the current URL without the fragment identifier
+		var cleanUrl = window.location.href.split('#')[0];
+
+		// Replace the current URL in the history without reloading
+		history.replaceState(null, null, cleanUrl);
+
+		// Scroll back to top of the page
+		window.scrollTo(0, 0);
+	});
+
 	let canvas = document.createElement('canvas');
 	let base64Image = null;
 	let hiddenInput = null;
@@ -160,7 +169,6 @@
 		canvas.height = video.videoHeight;
 		let context = canvas.getContext('2d')
 		context.drawImage(video, 0, 0);
-		base64Image = null;
 		base64Image = canvas.toDataURL('image/jpeg', 1.0);
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		
@@ -182,6 +190,8 @@
 		hiddenInput.type = 'hidden';
 		hiddenInput.name = 'capturedImage';
 		hiddenInput.value = base64Image;
+
+		// Append hiddenInput as part of the form 
 		generateForm.appendChild(hiddenInput);
 	});
 
